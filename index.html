@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>TrapGrid by BrianReallyMany</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>TrapGrid</h1>
+        <h2>Simulates layout of traps in an area with insect outbreak and dispersal; calculates capture probability</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/BrianReallyMany/TrapGrid/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/BrianReallyMany/TrapGrid/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/BrianReallyMany/TrapGrid" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h2>
+<a name="trapgrid" class="anchor" href="#trapgrid"><span class="octicon octicon-link"></span></a>TrapGrid</h2>
+
+<p>TrapGrid simulates insect dispersal in a rectangular area containing traps. Each trap has a parameter indicating its attractiveness. Using this value, the escape probability for a given insect at a given distance from the trap can be calculated.</p>
+
+<p>An outbreak is determined by a quantity of insects released at a given point and having a certain diffusion coefficient. The simulation can be run for any number of days, and will calculate the daily average escape probability for the colony, as well as a cumulative escape probability.</p>
+
+<p>Usage:</p>
+
+<p><code>java -jar TrapGrid.jar &lt;TrapGrid file&gt; [-ob &lt;outbreak file&gt;] [-nd &lt;number of days&gt;] [-ns &lt;number of simulations&gt;] [-nf &lt;number of flies per outbreak&gt;] [-dc &lt;diffusion coefficient&gt;] [-s &lt;seed for random number generator&gt;] [-t &lt;tolerance for TrapGrid average escape probability calculator&gt;] [--calculateAvgEscProb]</code></p>
+
+<h3>
+<a name="trapgrid-file" class="anchor" href="#trapgrid-file"><span class="octicon octicon-link"></span></a>TrapGrid file</h3>
+
+<p>A TrapGrid file is a tab-delimited file. The first row should contain x and y values representing the upper-right corner of a rectangle (whose lower-left corner is (0,0)). Each subsequent line should have three entries -- x, y and lambda representing the position and attractiveness of each trap. </p>
+
+<h3>
+<a name="other-inputs" class="anchor" href="#other-inputs"><span class="octicon octicon-link"></span></a>Other inputs</h3>
+
+<p>You may supply an optional Outbreak file, which is a two-column tab-delimited file containing the x and y locations of outbreaks to be simulated. If you provide this file, the program will run one simulation per location.</p>
+
+<p>The last flag, '--calculateAvgEscProb', enables calculation of the grid's overall average escape probability. Depending on the size of the area in question, this calculation can be time-consuming, and of course does not need to be repeated for multiple runs using the same grid.</p>
+
+<h3>
+<a name="output" class="anchor" href="#output"><span class="octicon octicon-link"></span></a>Output</h3>
+
+<p>TrapGrid writes to stdout. It will print a summary of the grid and other parameters used, along with a table. The table gives Outbreak Location, Day and Cumulative Escape Probability for each day of each outbreak simulated.</p>
+
+<h3>
+<a name="sample-data" class="anchor" href="#sample-data"><span class="octicon octicon-link"></span></a>Sample data</h3>
+
+<p>The repository ships with a sample TrapGrid file called 'foogrid'. Running the program as follows:</p>
+
+<p><code>java -jar TrapGrid.jar -tg foogrid</code></p>
+
+<p>will run a simulation of a single outbreak consisting of 500 files in a 100m by 100m grid.</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
