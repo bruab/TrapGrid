@@ -94,4 +94,17 @@ public class EsotericMath {
 		Point2D.Double result = new Point2D.Double(x, y);
 		return result;
 	}	
+	
+	/**
+	 * Calculates Mean Dispersal Distance
+	 * Uses Bovet and Benhamou (1988) formula:
+	 * MDD = L * sqrt((0.79 * n * (1 + r) * (1 - 4))
+	 * where L is step size, n is number of steps, and
+	 * r = exp(-SDA^2 / 2)
+	 * (and and and, SDA is stdev in radians of turning angles)
+	 */
+	public static double calculateMDD(double stepSize, int numberOfSteps, double stdev) {
+		double r = Math.exp((-Math.pow(stdev, numberOfSteps))/2);
+		return stepSize * Math.sqrt( 0.79 * numberOfSteps * (1-r) * (1+r));
+	}
 }

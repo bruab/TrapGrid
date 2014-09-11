@@ -60,5 +60,15 @@ public class EsotericMathTest {
 			assertTrue(testPoint.getY() <= 100);
 		}
 	}
+	
+	@Test
+	public void testCalculateMDD() {
+		double stepSize = 4;
+		int numberOfSteps = 100;
+		double stdev = 54;
+		double expected = 35.55277767;  // thanks, Wolfram Alpha!
+		double actual = EsotericMath.calculateMDD(stepSize, numberOfSteps, stdev);
+		assertEquals(expected, actual, 0.00000001);
+	}
 
 }
