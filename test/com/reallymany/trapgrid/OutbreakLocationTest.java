@@ -17,8 +17,12 @@ public class OutbreakLocationTest {
 	public void setUp() throws Exception {
 		Point2D.Double p1 = new Point2D.Double(5, 7);
 		Random testRNG = new Random();
+		double stepSize = 3.0;
+		int stepsPerDay = 10;
+		double turnAngleStdev = 40.0;
+		boolean useMDD = false;
 		long testSeed = testRNG.nextLong();
-		fr1 = new OutbreakLocation(p1, 100, 30, testSeed);
+		fr1 = new OutbreakLocation(p1, 100, 30, stepSize, stepsPerDay, turnAngleStdev, useMDD, testSeed);
 	}
 
 	@Test

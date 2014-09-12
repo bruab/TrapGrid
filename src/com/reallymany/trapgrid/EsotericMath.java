@@ -72,7 +72,7 @@ public class EsotericMath {
 			int stepsPerDay, double turnAngleStdev, int day, int numberOfPoints, Random rng) {
 		int numberOfSteps = day * stepsPerDay;
 		double mdd = calculateMDD(stepSize, numberOfSteps, turnAngleStdev);
-		ArrayList<Point2D.Double> result = pickPointsWithRadius(releasePoint, mdd, numberOfPoints, rng);		
+		ArrayList<Point2D.Double> result = pickPointsWithRadius(releasePoint, mdd, numberOfPoints, rng);	
 		return result;
 	}
 	

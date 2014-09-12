@@ -32,7 +32,7 @@ public class Outbreak {
 					int n = Integer.parseInt(nextLine[2]);
 					double diffc = Double.parseDouble(nextLine[3]);
 					Point2D.Double newPoint = new Point2D.Double(x, y);
-					OutbreakLocation newOutbreakLocation = new OutbreakLocation(newPoint, n, diffc, seed);
+					OutbreakLocation newOutbreakLocation = new OutbreakLocation(newPoint, n, diffc, 0, 0, 0, false, seed);
 					myPoints.add(newOutbreakLocation);
 				} else {
 					System.err.println("Invalid input! " +
@@ -58,7 +58,8 @@ public class Outbreak {
 	 * @param diffCoeff Diffusion Coefficient for outbreak
 	 * @param rng Random object
 	 */
-	public Outbreak(double x, double y, int n, double diffCoeff, long seed, boolean locationIsRandom) {
+	public Outbreak(double x, double y, int n, double diffCoeff, double stepSize, int stepsPerDay, double turnAngleStdev,
+			boolean useMDD, long seed, boolean locationIsRandom) {
 		this.allOutbreakLocations = new ArrayList<OutbreakLocation>();
 		Point2D.Double myPoint;
 		if (locationIsRandom) {
@@ -67,7 +68,8 @@ public class Outbreak {
 		} else {
 			myPoint = new Point2D.Double(x, y);
 		} 		
-		OutbreakLocation rp = new OutbreakLocation(myPoint, n, diffCoeff, seed);
+		OutbreakLocation rp = new OutbreakLocation(myPoint, n, diffCoeff, stepSize, stepsPerDay, 
+				turnAngleStdev, useMDD, seed);
 		this.allOutbreakLocations.add(rp);
 	}
 	

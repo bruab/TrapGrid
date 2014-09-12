@@ -13,6 +13,10 @@ public class Driver {
 	static double tolerance = 0.0001;
 	static int numberOfFlies = 0;		
 	static double diffCoeff = 0.0;	
+	static double stepSize = 0.0;
+	static int stepsPerDay = 0;
+	static double turnAngleStdev = 0.0;
+	static boolean useMDD = false;
 	static boolean calculateAverageEscapeProbability = false;
 	static boolean outbreakLocationsProvided = false;
 	static TrapGrid tg;
@@ -74,6 +78,11 @@ public class Driver {
 			diffCoeff = 30.0;
 			System.err.println("No value specified for diffusion coefficient; will use 30.0\n");
 		}
+		
+		// If stepSize, stepsPerDay and turnAngleStdev supplied, use MDD model. Otherwise, it's diffusion.
+		if ( (stepSize != 0) && (stepsPerDay != 0) && (turnAngleStdev != 0) ) {
+			useMDD = true;
+		}
 				
 		// Create TrapGrid
 		try {
@@ -104,18 +113,26 @@ public class Driver {
 		System.out.println("#Number of days: " + numberOfDays);
 		System.out.println("#Number of simulations: " + numberOfSimulations);
 		System.out.println("#Number of flies per outbreak: " + numberOfFlies);
-		System.out.println("#Diffusion coefficient: " + diffCoeff);
+		if (useMDD) {
+			System.out.println("#Step size: " + stepSize);
+			System.out.println("#Steps per day: " + stepsPerDay);
+			System.out.println("#Turn angle stdev: " + turnAngleStdev);
+		} else {
+			System.out.println("#Diffusion coefficient: " + diffCoeff);
+		}
 		System.out.println("#Random seed: " + randomSeed);
 		System.out.println("##################################################################\n");
 
 		// Now run simulations
 		if (! outbreakLocationsProvided) {
 			simRunner = 
-					new SimulationRunner(tg, numberOfDays, numberOfFlies, diffCoeff, randomSeed, numberOfSimulations);
+					new SimulationRunner(tg, numberOfDays, numberOfFlies, diffCoeff, 
+							stepSize, stepsPerDay, turnAngleStdev, useMDD, randomSeed, numberOfSimulations);
 			simRunner.runSimulations();
 		} else {	
 			simRunner = 
-					new SimulationRunner(tg, outbreakFile, numberOfDays, numberOfFlies, diffCoeff, randomSeed);
+					new SimulationRunner(tg, outbreakFile, numberOfDays, numberOfFlies, diffCoeff, 
+							stepSize, stepsPerDay, turnAngleStdev, useMDD, randomSeed);
 			simRunner.runSimulations();
 		}
 		
@@ -200,6 +217,30 @@ public class Driver {
 					}
 				} else if (args[i].equals("--calculateAvgEscProb")) {
 					calculateAverageEscapeProbability = true;
+				} else if (args[i].equals("--step-size")) {
+					try {
+						stepSize = Double.parseDouble(args[i+1]);
+					} catch (NumberFormatException e) {
+						System.err.println("Sorry, " + args[i+1] + " is not a valid step size. Exiting.");
+						e.printStackTrace();
+						System.exit(-1);
+					}
+				} else if (args[i].equals("--steps-per-day")) {
+					try {
+						stepsPerDay = Integer.parseInt(args[i+1]);
+					} catch (NumberFormatException e) {
+						System.err.println("Sorry, " + args[i+1] + " is not a valid number of steps per day. Exiting.");
+						e.printStackTrace();
+						System.exit(-1);
+					}
+				} else if (args[i].equals("--turn-angle-stdev")) {
+					try {
+						turnAngleStdev = Double.parseDouble(args[i+1]);
+					} catch (NumberFormatException e) {
+						System.err.println("Sorry, " + args[i+1] + " is not a valid turn angle stdev. Exiting.");
+						e.printStackTrace();
+						System.exit(-1);
+					}
 				} else {
 					continue;
 				}				

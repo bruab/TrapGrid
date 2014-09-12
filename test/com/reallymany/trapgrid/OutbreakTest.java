@@ -14,9 +14,13 @@ public class OutbreakTest {
 	public void setUp() throws Exception {
 		rng = new Random();
 		long seed = rng.nextLong();
+		double stepSize = 0.0;
+		int stepsPerDay = 0;
+		double turnAngleStdev = 0.0;
+		boolean useMDD = false;
 		testOutbreak1 = new Outbreak("test/com/reallymany/trapgrid/test_files/test_releases_1.tsv", seed);
-		testOutbreak2 = new Outbreak(10, 10, 500, 30, 100, true);
-		testOutbreak3 = new Outbreak(25, 38.3, 200, 30, 100, false);
+		testOutbreak2 = new Outbreak(10, 10, 500, 30, stepSize, stepsPerDay, turnAngleStdev, useMDD, 100, true);
+		testOutbreak3 = new Outbreak(25, 38.3, 200, 30, stepSize, stepsPerDay, turnAngleStdev, useMDD, 100, false);
 	}
 
 	@Test

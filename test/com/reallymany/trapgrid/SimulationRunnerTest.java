@@ -18,6 +18,10 @@ public class SimulationRunnerTest {
 	int numFlies = 100;
 	int numDays = 10;
 	double diffCoeff = 30;
+	double stepSize = 1.0;
+	int stepsPerDay = 10;
+	double turnAngleStdev = 40.0;
+	boolean useMDD = false;
 	
 	// Outbreak requires: double x, double y, int n, double diffCoeff, long seed
 	// simrunner requires TrapGrid tg, int numDays, int numFlies, double diffC, long seed, int numSims
@@ -26,9 +30,11 @@ public class SimulationRunnerTest {
 		rand = new Random();
 		long seed = rand.nextLong();
 		mockTG = mock(TrapGrid.class);
-		testSimRunner1 = new SimulationRunner(mockTG, numDays, numFlies, diffCoeff, seed, 5);
+		testSimRunner1 = new SimulationRunner(mockTG, numDays, numFlies, diffCoeff, 
+				stepSize, stepsPerDay, turnAngleStdev, useMDD, seed, 5);
 		mockSim1 = mock(Simulation.class);
-		testSimRunner2 = spy(new SimulationRunner(mockTG, numDays, numFlies, diffCoeff, seed, 2));
+		testSimRunner2 = spy(new SimulationRunner(mockTG, numDays, numFlies, diffCoeff, 
+				stepSize, stepsPerDay, turnAngleStdev, useMDD, seed, 2));
 		doReturn(mockSim1)
 			.when(testSimRunner2)
 			.createSimulation( any( TrapGrid.class), any ( Outbreak.class));
@@ -37,7 +43,8 @@ public class SimulationRunnerTest {
 			.when(mockSim1)
 			.runSimulation();
 		String outbreakFile = "foo.outbreak";
-		testSimRunner3 = new SimulationRunner(mockTG, outbreakFile, numDays, numFlies, diffCoeff, seed);
+		testSimRunner3 = new SimulationRunner(mockTG, outbreakFile, numDays, numFlies, diffCoeff, 
+				stepSize, stepsPerDay, turnAngleStdev, useMDD, seed);
 	}
 
 	@Test

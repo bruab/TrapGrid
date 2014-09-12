@@ -14,29 +14,43 @@ public class SimulationRunner {
 	int numberOfDays;
 	int numberOfFlies;
 	double diffCoeff;
+	double stepSize;
+	int stepsPerDay;
+	double turnAngleStdev;
+	boolean useMDD;
 	Random rng;
 	ArrayList<SimulationResultsHolder> allResults;
 	boolean outbreakLocationsProvided;
 	String outbreakFile;
 	ArrayList<Outbreak> outbreaks;
 
-	public SimulationRunner(TrapGrid tg, int numDays, int numFlies, double diffC, long seed, int numSims) {
+	public SimulationRunner(TrapGrid tg, int numDays, int numFlies, double diffC, 
+			double stepSize, int stepsPerDay, double turnAngleStdev, boolean useMDD, long seed, int numSims) {
 		this.tg = tg;
 		this.numberOfDays = numDays;
 		this.numberOfFlies = numFlies;
 		this.diffCoeff = diffC;
+		this.stepSize = stepSize;
+		this.stepsPerDay = stepsPerDay;
+		this.turnAngleStdev = turnAngleStdev;
+		this.useMDD = useMDD;
 		this.rng = new Random(seed);		
 		this.numberOfSimulations = numSims;
 		allResults = new ArrayList<SimulationResultsHolder>();
 		outbreakLocationsProvided = false;
 	}
 	
-	public SimulationRunner(TrapGrid tg, String outbreakFile, int numDays, int numFlies, double diffCoeff, long seed) {
+	public SimulationRunner(TrapGrid tg, String outbreakFile, int numDays, int numFlies, double diffCoeff,
+			double stepSize, int stepsPerDay, double turnAngleStdev, boolean useMDD, long seed) {
 		this.tg = tg;
 		this.numberOfDays = numDays;
 		this.outbreakFile = outbreakFile;
 		this.numberOfFlies = numFlies;
 		this.diffCoeff = diffCoeff;
+		this.stepSize = stepSize;
+		this.stepsPerDay = stepsPerDay;
+		this.turnAngleStdev = turnAngleStdev;
+		this.useMDD = useMDD;
 		this.rng = new Random(seed);
 		allResults = new ArrayList<SimulationResultsHolder>();
 		outbreakLocationsProvided = true;
@@ -50,7 +64,7 @@ public class SimulationRunner {
 		boolean useRandomLocation = true;
 		double xMax = tg.xMax;
 		double yMax = tg.yMax;
-		Outbreak f = new Outbreak(xMax, yMax, numberOfFlies, diffCoeff, s, useRandomLocation);
+		Outbreak f = new Outbreak(xMax, yMax, numberOfFlies, diffCoeff, stepSize, stepsPerDay, turnAngleStdev, useMDD, s, useRandomLocation);
 		return f;
 	}
 
@@ -90,7 +104,8 @@ public class SimulationRunner {
 					double x = Double.parseDouble(nextLine[0]);
 					double y = Double.parseDouble(nextLine[1]);
 					long nextLong = rng.nextLong();
-					Outbreak ob = new Outbreak(x, y, numberOfFlies, diffCoeff, nextLong, useRandomLocation);
+					Outbreak ob = new Outbreak(x, y, numberOfFlies, diffCoeff, stepSize, 
+							stepsPerDay, turnAngleStdev, useMDD, nextLong, useRandomLocation);
 					myOutbreaks.add(ob);					
 				} else {
 					System.err.println("Invalid input! TrapGrid file must have 3 values per line (x, y, lambda).");
