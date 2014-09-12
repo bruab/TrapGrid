@@ -25,6 +25,8 @@ public class Driver {
 	static String usageMessage = "Usage: java -jar TrapGrid.jar -tg <TrapGrid file> [-ob <outbreak file>] " +
 			"[-nd <number of days>] [-ns <number of simulations>]\n[-nf <number of flies per outbreak>] " +
 			"[-dc <diffusion coefficient>] [-s <seed for random number generator>]\n" +
+			"[--step-size <step size>] [--steps-per-day <steps per day>]\n" +
+			"[--turn-angle-stdev <standard deviation for turn angles>]\n" +
 			"[-t <tolerance for TrapGrid average escape probability calculator>] " +
 			"[--calculateAvgEscProb]\n" + 
 			"(Type 'java -jar TrapGrid.jar --help' for more detailed info.)\n";
@@ -36,7 +38,10 @@ public class Driver {
 			"position and attractiveness of each trap.\n" + 
 			"You may supply an optional Outbreak file, which is a two-column tab-delimited file" + 
 			"containing the x and y locations of outbreaks to be simulated.\n" + 
-			"If you provide this file, the program will run one simulation per location.\n\n";
+			"If you provide this file, the program will run one simulation per location.\n" +
+			"The default mode uses a diffusion model for insect dispersal. However, if you\n" + 
+			"provide a step size, steps per day and turn angle standard deviation, a\n" + 
+			"Mean Dispersal Distance model is used.\n\n";
 			
 	/**
 	 * Processes arguments and runs simulation.
