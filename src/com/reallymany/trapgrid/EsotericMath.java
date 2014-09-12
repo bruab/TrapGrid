@@ -1,6 +1,7 @@
 package com.reallymany.trapgrid;
 
 import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -66,6 +67,15 @@ public class EsotericMath {
 		}
 		return result;
 	}
+	
+	public static ArrayList<Point2D.Double> pickSomePointsMDD(Point2D.Double releasePoint, double stepSize, 
+			int stepsPerDay, double turnAngleStdev, int day, int numberOfPoints, Random rng) {
+		int numberOfSteps = day * stepsPerDay;
+		double mdd = calculateMDD(stepSize, numberOfSteps, turnAngleStdev);
+		ArrayList<Point2D.Double> result = pickPointsWithRadius(releasePoint, mdd, numberOfPoints, rng);		
+		return result;
+	}
+	
 
 	/**
 	 * Gives the standard deviation for the Gaussian distribution of a colony
@@ -124,9 +134,10 @@ public class EsotericMath {
 			y = y + center.y;
 			
 			// append to result
-			result.add(new Point2D.Double(x, y));			
+			result.add(new Point2D.Double(x, y));
 		}
 		return result;
 	}
+
 	
 }

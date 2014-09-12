@@ -49,6 +49,20 @@ public class EsotericMathTest {
 	}
 	
 	@Test
+	public void testPickSomePointsMDD() {
+		Point2D.Double releasePoint = new Point2D.Double(0.0, 0.0);
+		double stepSize = 1.0;
+		int stepsPerDay = 10;
+		double turnAngleStdev = 40.0;
+		int day = 3;
+		int numberOfPoints = 100;
+		Random rng = new Random();
+		ArrayList<Point2D.Double> myPoints = EsotericMath.pickSomePointsMDD(releasePoint, stepSize, stepsPerDay, 
+				turnAngleStdev, day, numberOfPoints, rng);
+		assertEquals(100, myPoints.size());
+	}
+	
+	@Test
 	public void testPickPointInGrid() {
 		Random rng = new Random();
 		// I know this doesn't *prove* anything but it's here for sanity...
