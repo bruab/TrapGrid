@@ -70,5 +70,18 @@ public class EsotericMathTest {
 		double actual = EsotericMath.calculateMDD(stepSize, numberOfSteps, stdev);
 		assertEquals(expected, actual, 0.00000001);
 	}
+	
+	@Test
+	public void testPickPointsWithRadius() {
+		Random rng = new Random();
+		Point2D.Double center = new Point2D.Double(1.1, 2.3);
+		double radius = 5.0;
+		int numberOfPoints = 100;
+		ArrayList<Point2D.Double> results = EsotericMath.pickPointsWithRadius(center, radius, numberOfPoints, rng);
+		for (int i=0; i<numberOfPoints; i++) {
+			// make sure all points are the same distance from center
+			assertEquals(5.0, Point2D.distance(center.x, center.y, results.get(i).x, results.get(i).y), 0.0001);
+		}		
+	}
 
 }

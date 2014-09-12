@@ -107,4 +107,26 @@ public class EsotericMath {
 		double r = Math.exp((-Math.pow(stdev, numberOfSteps))/2);
 		return stepSize * Math.sqrt( 0.79 * numberOfSteps * (1-r) * (1+r));
 	}
+	
+	public static ArrayList<Point2D.Double> pickPointsWithRadius(Point2D.Double center, double radius, int numPoints, Random rng) {
+		ArrayList<Point2D.Double> result = new ArrayList<Point2D.Double>();
+		double angle, x, y;
+		for (int i=0; i<numPoints; i++) {
+			// pick an angle between 0 and 2*pi
+			angle = rng.nextDouble()*2*Math.PI;  // in radians
+			
+			// find x and y offset (from center)
+			x = Math.cos(angle) * radius;
+			y = Math.sin(angle) * radius;
+			
+			// calculate actual x and y coordinates (considering center as starting point)
+			x = x + center.x;
+			y = y + center.y;
+			
+			// append to result
+			result.add(new Point2D.Double(x, y));			
+		}
+		return result;
+	}
+	
 }
