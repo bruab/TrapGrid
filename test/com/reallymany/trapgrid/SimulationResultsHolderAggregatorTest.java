@@ -47,9 +47,9 @@ public class SimulationResultsHolderAggregatorTest {
 		// Avg final cumulative esc prob = avg(0.05, 0.01) = 0.03
 		String expected = "Day\tAv Cumulative Escape Probability\n";
 		expected += "1\t0.1\n";
-		expected += "2\t0.03\n";
-//		String actual = simResHolAgg.aggregrateSimulationResultsHolders();
-//		assertEquals(expected, actual);
+		expected += "2\t0.030000000000000002\n"; // could format prettily but not gonna
+		String actual = simResHolAgg.aggregrateSimulationResultsHolders();
+		assertEquals(expected, actual);
 	}
 
 }

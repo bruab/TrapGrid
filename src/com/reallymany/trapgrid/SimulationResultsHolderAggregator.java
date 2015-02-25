@@ -15,31 +15,16 @@ public class SimulationResultsHolderAggregator {
 	
 	public String aggregrateSimulationResultsHolders() {
 		String result = "Day\tAv Cumulative Escape Probability\n";
-		Double avgProb;
-		int numSims, numProbs;
+		double avgProb;
 		// Find out how many days we simulated
 		int numDays = resultsHolders.get(0).avgEscapeProbabilityByDay.size();
 		
-		for (int day=0; day<numDays; day++) {
+		for (int day=1; day<=numDays; day++) {
 			avgProb = calculateAvgCumProb(day);
 			result += String.valueOf(day) + "\t";
 			result += String.valueOf(avgProb) + "\n";
 		}
 		
-		
-		ArrayList<Double> probs = new ArrayList<Double>();
-		for (SimulationResultsHolder simResHol : resultsHolders) {
-			numSims = simResHol.cumEscapeProbabilityByDay.size();
-			double finalProb = simResHol.cumEscapeProbabilityByDay.get(numSims);
-			probs.add(finalProb);			
-		}
-		double sum = 0.0;
-		for (double prob : probs) {
-			System.out.println(prob);
-			sum += prob;
-		}
-		numProbs = probs.size();
-		avgProb = sum / numProbs;
 		return result;
 	}
 
