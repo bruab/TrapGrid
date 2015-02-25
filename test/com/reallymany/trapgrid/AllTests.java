@@ -6,7 +6,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ TrapGridTest.class, TrapTest.class, EsotericMathTest.class, OutbreakLocationTest.class, OutbreakTest.class,
-				SimulationTest.class, SimulationRunnerTest.class, SimulationResultsHolderTest.class })
+				SimulationTest.class, SimulationRunnerTest.class, SimulationResultsHolderTest.class, 
+				SimulationResultsHolderAggregatorTest.class })
 public class AllTests {
 
 }
