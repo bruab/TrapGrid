@@ -144,7 +144,7 @@ public class Driver {
 		
 		// Print results
 		// first the average cumulative probabilities
-		System.out.println("#Averaged Simulation Results\n");
+		System.out.println("\n#Averaged Simulation Results\n");
 		SimulationResultsHolderAggregator agg = new SimulationResultsHolderAggregator(simRunner.allResults);
 		System.out.println(agg.aggregrateSimulationResultsHolders());
 		System.out.println("##################################################################\n");
