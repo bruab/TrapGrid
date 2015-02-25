@@ -33,7 +33,6 @@ public class SimulationResultsHolderAggregator {
 		double sum = 0.0;
 		int numProbs = 0;
 		for (SimulationResultsHolder simResHol : resultsHolders) {
-			System.out.println(simResHol.cumEscapeProbabilityByDay);
 			dailyProb = simResHol.cumEscapeProbabilityByDay.get(day); 
 			sum += dailyProb;
 			numProbs += 1;
