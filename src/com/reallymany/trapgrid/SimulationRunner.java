@@ -19,7 +19,7 @@ public class SimulationRunner {
 	double turnAngleStdev;
 	boolean useMDD;
 	Random rng;
-	ArrayList<SimulationResultsHolder> allResults;
+	public ArrayList<SimulationResultsHolder> allResults;
 	boolean outbreakLocationsProvided;
 	String outbreakFile;
 	ArrayList<Outbreak> outbreaks;
